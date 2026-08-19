@@ -1,0 +1,17 @@
+{
+  "name": "coiffrdv",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Prise de rendez-vous chez le coiffeur — web, iOS et Android.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspace @coiffrdv/core",
+    "test:db": "./scripts/test-db.sh",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "start": "npm run start --workspace @coiffrdv/mobile"
+  },
+  "license": "MIT"
+}

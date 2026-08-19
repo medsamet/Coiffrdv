@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Coiff'RDV",
+    "slug": "coiffrdv",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "coiffrdv",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "backgroundColor": "#faf7f4",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#1a1614"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "tn.coiffrdv.app"
+    },
+    "android": {
+      "package": "tn.coiffrdv.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#1a1614"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}
