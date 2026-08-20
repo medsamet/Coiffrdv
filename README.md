@@ -13,11 +13,13 @@ ses prestations et ses tarifs, puis valide ou refuse chaque demande.
 
 | Étape | État |
 |---|---|
-| Maquettes web + mobile | ✅ validées ([`maquettes/`](maquettes/)) |
+| Maquettes web + mobile | ✅ validées (hors dépôt — voir [`docs/01-specification.md`](docs/01-specification.md)) |
 | Choix technique | ✅ arrêté ([`docs/02-choix-technique.md`](docs/02-choix-technique.md)) |
 | Schéma de base + règles métier SQL | ✅ écrit et testé (11 groupes de règles) |
 | Cœur métier TypeScript partagé | ✅ écrit et testé (46 tests) |
-| Application Expo (web + mobile) | 🚧 en cours |
+| Application Expo — parcours client | ✅ complet |
+| Application Expo — back-office coiffeur | 🚧 tableau de bord, demandes, agenda du jour, réglages |
+| Blocage de créneaux, vue semaine, fiches clients | ⬜ à faire |
 | Envoi réel des emails / SMS | ⬜ à faire |
 
 ---
@@ -47,7 +49,6 @@ Ce ne sont pas des intentions : chacune est vérifiée par un test.
 ## Ce que contient le dépôt
 
 ```
-maquettes/          Les deux maquettes validées, à ouvrir dans un navigateur
 docs/               Spécification, choix technique, modèle de données, mise en route
 supabase/
   migrations/       Le schéma et toute la logique métier (PostgreSQL)
