@@ -34,12 +34,17 @@ begin
   insert into auth.users (id, phone, raw_user_meta_data)
   values (v_nadia, '+21622456789', jsonb_build_object('full_name', 'Nadia Mansour'));
 
-  insert into public.profiles (id, role, full_name, email, notify_channel)
-    values (v_barber, 'barber', 'Coupe & Style', 'coiffeur@coupe-style.tn', 'email');
-  insert into public.profiles (id, role, full_name, email, notify_channel)
-    values (v_karim, 'client', 'Karim Belhadj', 'karim.b@exemple.com', 'email');
-  insert into public.profiles (id, role, full_name, phone, notify_channel)
-    values (v_nadia, 'client', 'Nadia Mansour', '+21622456789', 'sms');
+  -- Les profils ont déjà été créés par le trigger on_auth_user_created, avec le
+  -- bon canal de notification déduit de l'identifiant. On vérifie ce point au
+  -- passage : c'est le maillon entre l'authentification et les données métier.
+  assert (select count(*) from public.profiles) = 3,
+    'le trigger on_auth_user_created doit créer un profil par compte';
+  assert (select notify_channel from public.profiles where id = v_nadia) = 'sms',
+    'un compte cree par telephone doit recevoir ses notifications par SMS';
+  assert (select notify_channel from public.profiles where id = v_karim) = 'email',
+    'un compte cree par email doit recevoir ses notifications par email';
+
+  update public.profiles set role = 'barber' where id = v_barber;
 
   insert into public.salons (owner_id, name, address, timezone, slot_step_minutes,
                              min_lead_minutes, cancel_deadline_minutes)
