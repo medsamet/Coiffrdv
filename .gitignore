@@ -10,3 +10,6 @@ pgdata/
 *.tsbuildinfo
 ios/
 android/
+
+# Généré par scripts/build-setup-sql.sh à partir de supabase/migrations/
+supabase/setup.sql
