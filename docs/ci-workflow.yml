@@ -1,0 +1,62 @@
+# Intégration continue — À COPIER dans .github/workflows/ci.yml
+#
+# Ce fichier ne peut pas être poussé directement sous .github/workflows/ : la
+# connexion GitHub utilisée pour créer ce dépôt n'a pas la permission « workflows ».
+# Copiez-le à la main :
+#
+#   mkdir -p .github/workflows && cp docs/ci-workflow.yml .github/workflows/ci.yml
+#
+# Il lance, à chaque push et chaque pull request, les 11 groupes de règles métier
+# sur un vrai PostgreSQL 16, puis les 46 tests du cœur métier TypeScript.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  regles-metier-sql:
+    name: Règles métier (PostgreSQL)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer le client psql
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Appliquer les migrations et lancer les tests
+        env:
+          PGHOST: localhost
+          PGPORT: '5432'
+          PGUSER: postgres
+          PGPASSWORD: postgres
+        run: ./scripts/test-db.sh
+
+  coeur-metier-typescript:
+    name: Cœur métier (TypeScript)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/core
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      - name: Vérification des types
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
