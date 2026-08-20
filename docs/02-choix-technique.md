@@ -45,7 +45,7 @@ cette écriture directe et vérifie que le moteur la rejette.
 ## Ce qu'on a écarté, et pourquoi
 
 **Flutter + Firebase.** Excellent en mobile, et Dart est agréable. Deux objections :
-le rendu web de Flutter est lourd et mal réفérencé par Google, ce qui pénalise la
+le rendu web de Flutter est lourd et mal référencé par Google, ce qui pénalise la
 page vitrine du salon ; et Firestore complique exactement la règle qui compte le plus
 (voir ci-dessus).
 

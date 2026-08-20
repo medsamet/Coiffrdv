@@ -1,5 +1,5 @@
 /** Types de la base, écrits à la main pour rester lisibles.
- *  (`supabase gen types typescript` peut les regénérer si le schéma bouge.) */
+ *  (`supabase gen types typescript` peut les régénérer si le schéma bouge.) */
 
 export type AppRole = 'client' | 'barber';
 export type ServiceKind = 'beard' | 'hair' | 'beard_hair' | 'kids';
